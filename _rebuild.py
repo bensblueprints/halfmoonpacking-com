@@ -1,0 +1,962 @@
+import os
+import re
+import glob
+from html.parser import HTMLParser
+
+# ============================================
+# NEW MODERN CSS - Completely different design
+# ============================================
+NEW_CSS = '''/* ===== HALFMOON PACKING - MODERN 2026 ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --forest:#0d1f0a;
+  --forest-mid:#1a3a14;
+  --forest-light:#2d5a22;
+  --saddle:#a0522d;
+  --saddle-light:#cd853f;
+  --cream:#faf8f3;
+  --cream-warm:#f5efe6;
+  --gold:#d4a843;
+  --gold-light:#e8c96a;
+  --amber:#c17817;
+  --charcoal:#1a1a1a;
+  --text:#2c3328;
+  --text-light:#5a6654;
+  --text-muted:#8a9584;
+  --white:#ffffff;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:0 8px 30px rgba(0,0,0,0.12);
+  --shadow-lg:0 20px 60px rgba(0,0,0,0.18);
+  --shadow-gold:0 8px 30px rgba(212,168,67,0.2);
+  --radius-sm:8px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:32px;
+  --transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:var(--text);
+  line-height:1.65;
+  background:var(--forest);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--forest);}
+::-webkit-scrollbar{width:10px;}
+::-webkit-scrollbar-track{background:var(--forest);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:5px;border:2px solid var(--forest);}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-light);}
+
+/* ===== BACKGROUND TEXTURE ===== */
+.bg-texture{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(45,90,34,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(193,120,23,0.08) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size:cover,cover,200px 200px;
+  opacity:0.4;
+}
+
+/* ===== HEADER ===== */
+.site-header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  padding:1rem 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:var(--transition);
+  background:transparent;
+}
+.site-header.scrolled{
+  background:rgba(13,31,10,0.85);
+  backdrop-filter:blur(20px) saturate(1.3);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);
+  box-shadow:var(--shadow-md);
+  padding:0.6rem 2rem;
+}
+.header-inner{
+  max-width:1400px;
+  margin:0 auto;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.site-logo img{
+  max-height:55px;
+  width:auto;
+  filter:brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition:var(--transition);
+}
+.site-logo:hover img{transform:scale(1.05);}
+.phone-tag{
+  color:var(--gold-light);
+  font-size:0.95rem;
+  font-weight:600;
+  letter-spacing:0.5px;
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+}
+.phone-tag::before{
+  content:'📞';
+  font-size:0.85rem;
+}
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  color:var(--white);
+  font-size:1.5rem;
+  cursor:pointer;
+  padding:0.5rem;
+  border-radius:var(--radius-sm);
+  transition:var(--transition);
+}
+.nav-toggle:hover{background:rgba(255,255,255,0.1);color:var(--gold);}
+
+/* ===== NAVIGATION ===== */
+.main-nav{
+  position:fixed;
+  top:70px;
+  left:0;right:0;
+  z-index:999;
+  padding:0 2rem;
+  transition:var(--transition);
+  background:transparent;
+}
+.main-nav.scrolled{
+  top:55px;
+  background:rgba(13,31,10,0.7);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.nav-inner{max-width:1400px;margin:0 auto;}
+.nav-list{
+  display:flex;
+  list-style:none;
+  gap:0.25rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.nav-list li{position:relative;}
+.nav-list li a{
+  display:block;
+  padding:0.6rem 1rem;
+  color:rgba(255,255,255,0.85);
+  text-decoration:none;
+  font-weight:500;
+  font-size:0.82rem;
+  letter-spacing:0.8px;
+  text-transform:uppercase;
+  transition:var(--transition);
+  border-radius:var(--radius-sm);
+  white-space:nowrap;
+}
+.nav-list li a:hover{
+  color:var(--gold);
+  background:rgba(212,168,67,0.1);
+}
+.nav-list li.current > a{color:var(--gold);background:rgba(212,168,67,0.15);}
+.dropdown{
+  display:none;
+  position:absolute;
+  top:calc(100% + 8px);
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(20,45,15,0.98);
+  min-width:260px;
+  list-style:none;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  border:1px solid rgba(212,168,67,0.2);
+  box-shadow:var(--shadow-lg);
+  backdrop-filter:blur(20px);
+  animation:dropdownPop 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.dropdown::before{
+  content:'';
+  position:absolute;
+  top:-6px;
+  left:50%;
+  transform:translateX(-50%) rotate(45deg);
+  width:12px;height:12px;
+  background:rgba(20,45,15,0.98);
+  border-top:1px solid rgba(212,168,67,0.2);
+  border-left:1px solid rgba(212,168,67,0.2);
+}
+.dropdown .dropdown{top:0;left:calc(100% + 8px);transform:none;animation:dropdownSlide 0.2s ease;}
+.dropdown .dropdown::before{display:none;}
+.nav-list li:hover > .dropdown{display:block;}
+.dropdown li a{
+  padding:0.85rem 1.5rem;
+  font-size:0.8rem;
+  text-transform:none;
+  font-weight:400;
+  letter-spacing:0.3px;
+  border-radius:0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.dropdown li a:hover{background:rgba(212,168,67,0.12);padding-left:1.8rem;color:var(--gold-light);}
+@keyframes dropdownPop{from{opacity:0;transform:translateX(-50%) translateY(-10px) scale(0.95);}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}}
+@keyframes dropdownSlide{from{opacity:0;transform:translateX(-10px);}to{opacity:1;transform:translateX(0);}}
+
+/* ===== HERO BANNER ===== */
+.page-header-banner{
+  position:relative;
+  min-height:100vh;
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.page-header-banner::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(13,31,10,0.3) 0%, rgba(13,31,10,0.1) 40%, rgba(13,31,10,0.7) 100%);
+  z-index:1;
+}
+.page-header-banner::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;right:0;
+  height:200px;
+  background:linear-gradient(to top, var(--forest), transparent);
+  z-index:2;
+}
+.header-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 0%, rgba(13,31,10,0.4) 100%);z-index:1;}
+.header-content{
+  position:relative;
+  z-index:3;
+  text-align:center;
+  padding:2rem;
+  max-width:900px;
+  animation:heroUp 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.page-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2.5rem, 6vw, 5rem);
+  font-weight:700;
+  color:var(--white);
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  line-height:1.1;
+  margin-bottom:1.5rem;
+}
+.page-title::after{
+  content:'';
+  display:block;
+  width:100px;
+  height:3px;
+  background:var(--gold);
+  margin:1.5rem auto 0;
+  border-radius:2px;
+  box-shadow:0 0 30px rgba(212,168,67,0.5);
+  animation:growLine 1s ease 0.8s both;
+}
+@keyframes heroUp{from{opacity:0;transform:translateY(60px);}to{opacity:1;transform:translateY(0);}}
+@keyframes growLine{from{width:0;}to{width:100px;}}
+
+.scroll-indicator{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:4;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.5rem;
+  color:rgba(255,255,255,0.7);
+  font-size:0.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  animation:bounce 2s infinite;
+}
+.scroll-indicator::after{
+  content:'↓';
+  font-size:1.5rem;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(10px);}}
+
+/* ===== MAIN CONTENT - FULL BLEED SECTIONS ===== */
+.main-content{
+  position:relative;
+  z-index:2;
+}
+.content-card{
+  background:transparent;
+  box-shadow:none;
+  border:none;
+  padding:0;
+  max-width:none;
+}
+.content-card > div{max-width:none;}
+.content-card > div > section{
+  padding:5rem 2rem;
+  position:relative;
+  opacity:0;
+  transform:translateY(40px);
+  animation:sectionUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.content-card > div > section:nth-child(1){animation-delay:0.1s;}
+.content-card > div > section:nth-child(2){animation-delay:0.2s;}
+.content-card > div > section:nth-child(3){animation-delay:0.3s;}
+.content-card > div > section:nth-child(4){animation-delay:0.4s;}
+.content-card > div > section:nth-child(5){animation-delay:0.5s;}
+.content-card > div > section:nth-child(6){animation-delay:0.6s;}
+.content-card > div > section:nth-child(7){animation-delay:0.7s;}
+.content-card > div > section:nth-child(8){animation-delay:0.8s;}
+@keyframes sectionUp{to{opacity:1;transform:translateY(0);}}
+
+/* Alternating section backgrounds */
+.content-card > div > section:nth-child(odd){background:var(--cream);}
+.content-card > div > section:nth-child(even){background:var(--cream-warm);}
+.content-card > div > section:first-child{padding-top:6rem;}
+.content-card > div > section:last-child{padding-bottom:6rem;}
+
+/* Section inner wrapper */
+.content-card > div > section > *{
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.content-card h1,.content-card h2,.content-card h3,.content-card h4{
+  font-family:'Cinzel',serif;
+  color:var(--forest);
+  line-height:1.2;
+  margin-bottom:1.25rem;
+}
+.content-card h1{font-size:clamp(2rem, 4vw, 3rem);font-weight:700;}
+.content-card h1::after{
+  content:'';
+  display:block;
+  width:60px;
+  height:3px;
+  background:var(--gold);
+  margin-top:1rem;
+  border-radius:2px;
+}
+.content-card h2{font-size:clamp(1.6rem, 3vw, 2.2rem);font-weight:600;color:var(--saddle);}
+.content-card h3{font-size:clamp(1.2rem, 2vw, 1.5rem);font-weight:600;color:var(--forest-mid);}
+.content-card p{
+  margin-bottom:1.25rem;
+  font-size:1.05rem;
+  color:var(--text);
+  line-height:1.8;
+  max-width:70ch;
+}
+.content-card a{
+  color:var(--saddle);
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:2px solid var(--gold);
+  transition:var(--transition);
+  padding-bottom:1px;
+}
+.content-card a:hover{
+  color:var(--amber);
+  border-bottom-color:var(--amber);
+  background:rgba(212,168,67,0.08);
+  padding:2px 4px;
+  border-radius:4px;
+  margin:-2px -4px;
+}
+.content-card ul,.content-card ol{
+  margin-left:1.5rem;
+  margin-bottom:1.5rem;
+}
+.content-card li{
+  margin-bottom:0.75rem;
+  line-height:1.7;
+  padding-left:0.5rem;
+}
+.content-card li::marker{color:var(--gold);}
+.content-card blockquote{
+  border-left:4px solid var(--gold);
+  padding:1.5rem 2rem;
+  margin:2rem 0;
+  font-style:italic;
+  color:var(--text-light);
+  background:linear-gradient(90deg, rgba(212,168,67,0.06), transparent);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  font-size:1.1rem;
+}
+.content-card hr{
+  border:none;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:3rem auto;
+  max-width:200px;
+  opacity:0.5;
+}
+
+/* ===== IMAGES ===== */
+.content-card img{
+  max-width:100%;
+  height:auto;
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-md);
+  transition:var(--transition);
+  display:block;
+}
+.content-card img:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:var(--shadow-lg);
+}
+
+/* Image galleries - multiple images in a row */
+.content-card > div > section > div:only-child:has(> img + img){
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:1.25rem;
+}
+.content-card > div > section > div:only-child:has(> img + img) img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  margin:0;
+}
+
+/* Service/feature cards */
+.content-card > div > section > div:only-child:has(> div > h3){
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:2rem;
+}
+.content-card > div > section > div:only-child > div:has(> h3){
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  box-shadow:var(--shadow-sm);
+  border:1px solid rgba(0,0,0,0.04);
+  transition:var(--transition);
+  text-align:center;
+}
+.content-card > div > section > div:only-child > div:has(> h3):hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-md);
+  border-color:rgba(212,168,67,0.2);
+}
+.content-card > div > section > div:only-child > div:has(> h3) img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:var(--radius-md);
+  margin:0 0 1.25rem;
+}
+.content-card > div > section > div:only-child > div:has(> h3) h3{
+  margin-top:0;
+  font-size:1.15rem;
+  color:var(--forest);
+}
+.content-card > div > section > div:only-child > div:has(> h3) p{
+  font-size:0.95rem;
+  color:var(--text-light);
+}
+.content-card > div > section > div:only-child > div:has(> h3) a{
+  display:inline-block;
+  margin-top:0.75rem;
+  padding:0.6rem 1.5rem;
+  background:var(--forest);
+  color:var(--cream);
+  border-radius:50px;
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  border:none;
+  font-weight:600;
+  transition:var(--transition);
+}
+.content-card > div > section > div:only-child > div:has(> h3) a:hover{
+  background:var(--gold);
+  color:var(--forest);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-gold);
+}
+
+/* Staff/about cards alternating layout */
+.content-card > div > section:has(> img + h3),
+.content-card > div > section:has(> h3 + img){
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+  max-width:1100px;
+  margin:0 auto;
+}
+.content-card > div > section:has(> img + h3) img,
+.content-card > div > section:has(> h3 + img) img{
+  width:100%;
+  height:auto;
+  max-height:400px;
+  object-fit:cover;
+  border-radius:var(--radius-lg);
+}
+.content-card > div > section:has(> img + h3) h3,
+.content-card > div > section:has(> h3 + img) h3{
+  margin-top:0;
+}
+
+/* CTA Buttons in content */
+.content-card > div > section:has(> a) a{
+  display:inline-block;
+  margin:0.5rem 0.75rem 0 0;
+  padding:0.9rem 2rem;
+  background:var(--forest);
+  color:var(--cream);
+  border-radius:50px;
+  font-weight:600;
+  font-size:0.9rem;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  border:none;
+  transition:var(--transition);
+  box-shadow:var(--shadow-sm);
+}
+.content-card > div > section:has(> a) a:hover{
+  background:var(--gold);
+  color:var(--forest);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-gold);
+}
+
+/* ===== FOOTER ===== */
+.site-footer{
+  background:linear-gradient(180deg, var(--forest) 0%, #0a1508 100%);
+  color:rgba(255,255,255,0.7);
+  padding:4rem 2rem 2rem;
+  position:relative;
+  z-index:2;
+  border-top:1px solid rgba(212,168,67,0.15);
+}
+.site-footer::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:80px;
+  height:3px;
+  background:var(--gold);
+  border-radius:0 0 3px 3px;
+}
+.footer-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:3rem;
+  margin-bottom:3rem;
+}
+.footer-brand img{max-height:50px;filter:brightness(0) invert(1);margin-bottom:1rem;}
+.footer-brand p{font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.6);}
+.footer-col h4{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  font-size:0.9rem;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:1.25rem;
+}
+.footer-col a{
+  display:block;
+  color:rgba(255,255,255,0.6);
+  text-decoration:none;
+  padding:0.35rem 0;
+  font-size:0.85rem;
+  transition:var(--transition);
+}
+.footer-col a:hover{color:var(--gold-light);padding-left:4px;}
+.footer-bottom{
+  text-align:center;
+  padding-top:2rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+  font-size:0.85rem;
+  color:rgba(255,255,255,0.4);
+}
+.footer-social{
+  margin-top:1.5rem;
+  display:flex;
+  gap:0.75rem;
+}
+.footer-social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  background:rgba(212,168,67,0.1);
+  border:1px solid rgba(212,168,67,0.2);
+  border-radius:50%;
+  font-size:0.85rem;
+  transition:var(--transition);
+  color:var(--gold-light);
+  text-decoration:none;
+}
+.footer-social a:hover{
+  background:var(--gold);
+  color:var(--forest);
+  border-color:var(--gold);
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(212,168,67,0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .site-header{padding:0.75rem 1rem;}
+  .site-header.scrolled{padding:0.5rem 1rem;}
+  .main-nav{top:60px;padding:0 1rem;}
+  .main-nav.scrolled{top:48px;}
+  .nav-list{display:none;flex-direction:column;width:100%;background:rgba(13,31,10,0.98);border-radius:var(--radius-md);padding:0.5rem 0;box-shadow:var(--shadow-lg);border:1px solid rgba(212,168,67,0.15);}
+  .nav-list.active{display:flex;animation:dropdownPop 0.3s ease;}
+  .nav-toggle{display:block;margin-left:auto;}
+  .dropdown{position:static;display:none;transform:none;box-shadow:none;width:100%;border:none;border-radius:0;background:rgba(0,0,0,0.3);animation:none;}
+  .dropdown::before{display:none;}
+  .dropdown .dropdown{left:0;transform:none;animation:none;}
+  .nav-list li:hover > .dropdown{display:none;}
+  .nav-list li.open > .dropdown{display:block;}
+  .page-header-banner{min-height:70vh;background-attachment:scroll;}
+  .page-title{font-size:clamp(1.8rem, 5vw, 3rem);letter-spacing:2px;}
+  .content-card > div > section{padding:3rem 1.5rem;}
+  .content-card > div > section:first-child{padding-top:4rem;}
+  .content-card > div > section:has(> img + h3),
+  .content-card > div > section:has(> h3 + img){grid-template-columns:1fr;gap:1.5rem;}
+  .content-card > div > section > div:only-child:has(> div > h3){grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;gap:2rem;}
+  .footer-social{justify-content:center;}
+}
+@media (max-width:600px){
+  .page-title{font-size:1.6rem;}
+  .content-card h1{font-size:1.5rem;}
+  .content-card h2{font-size:1.3rem;}
+  .content-card p{font-size:0.95rem;}
+  .content-card > div > section{padding:2.5rem 1rem;}
+  .phone-tag span{display:none;}
+  .phone-tag::after{content:'Call';font-size:0.8rem;}
+}
+'''
+
+# ============================================
+# NEW MODERN JS
+# ============================================
+NEW_JS = '''(function(){
+  // Header scroll effect
+  const header=document.querySelector('.site-header');
+  const nav=document.querySelector('.main-nav');
+  function onScroll(){
+    if(window.scrollY>50){
+      header.classList.add('scrolled');
+      nav.classList.add('scrolled');
+    }else{
+      header.classList.remove('scrolled');
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  // Mobile menu
+  const toggle=document.querySelector('.nav-toggle');
+  const navList=document.querySelector('.nav-list');
+  if(toggle && navList){
+    toggle.addEventListener('click',function(){
+      navList.classList.toggle('active');
+    });
+  }
+
+  // Mobile dropdown toggles
+  document.querySelectorAll('.has-dropdown > a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      if(window.innerWidth<=900){
+        var li=this.parentElement;
+        var dd=li.querySelector('.dropdown');
+        if(dd && !li.classList.contains('open')){
+          e.preventDefault();
+          document.querySelectorAll('.nav-list li.open').forEach(function(o){if(o!==li)o.classList.remove('open');});
+          li.classList.toggle('open');
+        }
+      }
+    });
+  });
+
+  // Intersection Observer for section animations
+  const observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.style.animationPlayState='running';
+      }
+    });
+  },{threshold:0.1});
+
+  document.querySelectorAll('.content-card > div > section').forEach(function(sec){
+    sec.style.animationPlayState='paused';
+    observer.observe(sec);
+  });
+})();
+'''
+
+# ============================================
+# HTML TEMPLATE
+# ============================================
+HTML_TEMPLATE = '''<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/06ae721a_981216548.png" type="image/png">
+<link rel="stylesheet" href="{css_path}">
+</head>
+<body>
+<div class="bg-texture"></div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-logo">
+      <a href="index.html"><img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a>
+    </div>
+    <div class="phone-tag"><span>For Booking: (719) 486-4570</span></div>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="main-nav">
+  <div class="nav-inner">
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-dropdown"><a href="stagecoach.html">Stagecoach</a><ul class="dropdown depth-0">
+        <li><a href="rides/wagon-rides.html">Wagon Rides</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="rides.html">Riding</a><ul class="dropdown depth-0">
+        <li><a href="rides/full-day-horseback-rides.html">Full Day Horseback Rides</a></li>
+        <li><a href="rides/hourly-to-half-day.html">Hourly To Half Day</a></li>
+        <li><a href="rides/cavecreek-horseback-rides.html">Winter Horseback Rides</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="camping.html">Camping</a><ul class="dropdown depth-0">
+        <li><a href="camping/guided-horse-camping.html">Guided Horse Camping</a></li>
+        <li><a href="camping/horse-camping.html">Horse Camping</a></li>
+        <li><a href="camping/pack-service-summer.html">Pack Service</a></li>
+        <li><a href="camping/summer-drop-camps.html">Summer Drop Camps</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="hunting.html">Hunting</a><ul class="dropdown depth-0">
+        <li><a href="hunting/colorado-hunting-units.html">Colorado Hunting Units</a></li>
+        <li><a href="hunting/hunting-services.html">Hunting Services</a></li>
+        <li class="has-dropdown has-submenu"><a href="hunting/game.html">Game</a><ul class="dropdown depth-1">
+          <li><a href="hunting/game/antelope-hunt.html">Antelope Hunt</a></li>
+          <li><a href="hunting/game/bear-hunt-2.html">Bear Hunt</a></li>
+          <li><a href="hunting/game/elk-hunt-2.html">Elk Hunt</a></li>
+          <li><a href="hunting/game/moose-hunt-2.html">Moose Hunt</a></li>
+          <li><a href="hunting/game/mountain-lion-hunts.html">Mountain Lion Hunts</a></li>
+          <li><a href="hunting/game/mule-deer-hunt.html">Mule Deer Hunt</a></li>
+        </ul></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="fishing.html">Fishing</a><ul class="dropdown depth-0">
+        <li><a href="fishing/alpine-lakes.html">Alpine Lakes</a></li>
+        <li><a href="fishing/eagle-river.html">Eagle River</a></li>
+        <li><a href="fishing/lake-fishing.html">Lake Fishing</a></li>
+      </ul></li>
+      <li><a href="training-center.html">Training Center</a></li>
+      <li class="has-dropdown"><a href="gallery.html">Gallery</a><ul class="dropdown depth-0">
+        <li><a href="gallery/fishing-photos.html">Fishing Photos</a></li>
+        <li><a href="gallery/hunting-photos.html">Hunting Photos</a></li>
+        <li><a href="gallery/horseback-riding-photos.html">Horseback Riding Photos</a></li>
+        <li><a href="gallery/summer-camp-photos.html">Summer Camp Photos</a></li>
+        <li><a href="gallery/videos.html">Videos</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="about.html">About</a><ul class="dropdown depth-0">
+        <li><a href="about/tom-burch.html">Tom Burch</a></li>
+        <li><a href="about/anita-percifield.html">Anita Percifield</a></li>
+        <li><a href="about/ben-roehrs.html">Ben Roehrs</a></li>
+        <li><a href="about/charlie-howard.html">Charlie Howard</a></li>
+        <li><a href="about/jake-skobel.html">Jake Skobel</a></li>
+        <li><a href="about/keiley-smith.html">Keiley Smith</a></li>
+        <li><a href="about/luke-talley.html">Luke Talley</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="#">Booking</a><ul class="dropdown depth-0">
+        <li><a href="user-registration.html">Employee</a></li>
+        <li><a href="reservations.html">Reservation</a></li>
+        <li><a href="pay-at-checkin.html">Pay at checkin</a></li>
+      </ul></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header-banner" style="background-image:url('{banner_image}');">
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <h1 class="page-title">{banner_title}</h1>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+  <div class="content-card">
+    <div>
+{content}
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting">
+      <p>Colorado's premier outfitter for horseback riding, camping, hunting, and fishing adventures in the Rocky Mountains.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/halfmoonpacking" target="_blank" aria-label="Facebook">FB</a>
+        <a href="https://www.instagram.com/halfmoonpacking/" target="_blank" aria-label="Instagram">IG</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Adventures</h4>
+      <a href="rides.html">Horseback Riding</a>
+      <a href="camping.html">Camping</a>
+      <a href="hunting.html">Hunting</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="stagecoach.html">Stagecoach</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">About Us</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="training-center.html">Training Center</a>
+      <a href="contact.html">Contact</a>
+      <a href="reservations.html">Book Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Halfmoon Packing & Outfitting, LLC. All rights reserved.</p>
+    <p>1100 East Tennessee Rd, Leadville, CO 80461 | <a href="tel:7194864570">(719) 486-4570</a></p>
+  </div>
+</footer>
+
+<script src="{js_path}"></script>
+</body>
+</html>
+'''
+
+# ============================================
+# CONTENT EXTRACTION
+# ============================================
+
+def extract_from_html(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        html = f.read()
+    
+    # Extract title
+    title_match = re.search(r'<title>(.*?)</title>', html, re.DOTALL)
+    title = title_match.group(1).strip() if title_match else 'Halfmoon Packing & Outfitting'
+    
+    # Extract banner image
+    banner_match = re.search(r'background-image:url\([\'"](.*?)[\'"]\)', html)
+    banner_image = banner_match.group(1) if banner_match else 'images/55dfeea6_halfmoonbanner11.png'
+    
+    # Extract banner title
+    banner_title_match = re.search(r'<h1 class="page-title">(.*?)</h1>', html, re.DOTALL)
+    banner_title = re.sub(r'<.*?>', '', banner_title_match.group(1)).strip() if banner_title_match else 'Halfmoon Packing & Outfitting'
+    
+    # Extract content inside main > .content-card > div
+    content_match = re.search(r'<main class="main-content">\s*<div class="content-card">\s*<div>(.*?)\s*</div>\s*</div>\s*</main>', html, re.DOTALL)
+    if content_match:
+        content = content_match.group(1).strip()
+    else:
+        # Fallback: try looser match
+        content_match = re.search(r'<div class="content-card">\s*<div>(.*?)\s*</div>\s*</div>', html, re.DOTALL)
+        content = content_match.group(1).strip() if content_match else '<section><h1>Content Coming Soon</h1></section>'
+    
+    return {
+        'title': title,
+        'banner_image': banner_image,
+        'banner_title': banner_title,
+        'content': content
+    }
+
+def get_relative_path(filepath, base_dir):
+    rel = os.path.relpath(filepath, base_dir)
+    depth = rel.count(os.sep)
+    prefix = '../' * depth if depth > 0 else ''
+    # Remove filename to get directory
+    if depth == 0:
+        return ''
+    return '../' * depth
+
+def rebuild_page(filepath, base_dir, data):
+    rel_prefix = get_relative_path(filepath, base_dir)
+    
+    new_html = HTML_TEMPLATE.format(
+        title=data['title'],
+        banner_image=data['banner_image'],
+        banner_title=data['banner_title'],
+        content=data['content'],
+        css_path=rel_prefix + 'style.css',
+        js_path=rel_prefix + 'script.js'
+    )
+    
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(new_html)
+
+def main():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    html_files = glob.glob(os.path.join(base_dir, '**', '*.html'), recursive=True)
+    
+    # Exclude our scripts
+    html_files = [f for f in html_files if not os.path.basename(f).startswith('_')]
+    
+    print(f'Found {len(html_files)} HTML files to rebuild')
+    
+    # Write shared CSS and JS
+    css_path = os.path.join(base_dir, 'style.css')
+    js_path = os.path.join(base_dir, 'script.js')
+    
+    with open(css_path, 'w', encoding='utf-8') as f:
+        f.write(NEW_CSS)
+    print(f'Wrote {css_path}')
+    
+    with open(js_path, 'w', encoding='utf-8') as f:
+        f.write(NEW_JS)
+    print(f'Wrote {js_path}')
+    
+    success_count = 0
+    for filepath in sorted(html_files):
+        rel_path = os.path.relpath(filepath, base_dir)
+        print(f'Rebuilding: {rel_path}')
+        try:
+            data = extract_from_html(filepath)
+            rebuild_page(filepath, base_dir, data)
+            success_count += 1
+        except Exception as e:
+            print(f'  ERROR: {e}')
+    
+    print(f'\nDone! Rebuilt {success_count}/{len(html_files)} files.')
+
+if __name__ == '__main__':
+    main()

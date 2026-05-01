@@ -6,146 +6,21 @@
 <title>Professional Hunting Services | Halfmoon Packing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="../images/06ae721a_981216548.png" type="image/png">
-<style>
-/* ===== CSS VARIABLES ===== */
-:root{
-  --forest:#1a2e12;
-  --forest-light:#2d4a1e;
-  --forest-dark:#0f1f0a;
-  --saddle:#8B4513;
-  --saddle-light:#a0522d;
-  --cream:#f5f0e6;
-  --cream-dark:#e8e0d0;
-  --gold:#c9a227;
-  --gold-light:#ddb94d;
-  --slate:#3d4a3a;
-  --text:#2c3328;
-  --text-light:#5a6654;
-  --shadow:rgba(0,0,0,0.15);
-  --glass-bg:rgba(245,240,230,0.85);
-  --glass-border:rgba(201,162,39,0.25);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Source Sans 3',sans-serif;color:var(--text);line-height:1.7;background:var(--forest-dark);position:relative;min-height:100vh;overflow-x:hidden;}
-::-webkit-scrollbar{width:8px;}
-::-webkit-scrollbar-track{background:var(--forest-dark);}
-::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
-::-webkit-scrollbar-thumb:hover{background:var(--gold-light);}
-.maps-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;border:none;pointer-events:none;filter:grayscale(80%) brightness(0.25) contrast(1.2) blur(2px);transform:scale(1.05);}
-.maps-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;background:radial-gradient(ellipse at 20% 0%, rgba(45,74,30,0.4) 0%, transparent 50%),radial-gradient(ellipse at 80% 100%, rgba(139,69,19,0.25) 0%, transparent 50%),linear-gradient(180deg, rgba(15,31,10,0.88) 0%, rgba(15,31,10,0.78) 40%, rgba(15,31,10,0.88) 100%);}
-.site-header{background:linear-gradient(180deg, rgba(15,31,10,0.95) 0%, rgba(26,46,18,0.9) 100%);color:#fff;position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--glass-border);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);box-shadow:0 4px 30px rgba(0,0,0,0.3);}
-.header-inner{max-width:1400px;margin:0 auto;padding:0.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.site-logo img{max-height:65px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4));transition:transform 0.3s ease, filter 0.3s ease;}
-.site-logo:hover img{transform:scale(1.05);filter:drop-shadow(0 4px 12px rgba(201,162,39,0.3));}
-.phone-tag{color:var(--gold-light);font-size:1.05rem;font-weight:600;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(0,0,0,0.3);}
-.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer;padding:0.5rem;transition:color 0.2s;}
-.nav-toggle:hover{color:var(--gold);}
-.main-nav{background:rgba(26,46,18,0.6);position:sticky;top:calc(65px + 1.5rem);z-index:999;border-bottom:1px solid var(--glass-border);backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px) saturate(1.1);}
-.nav-inner{max-width:1400px;margin:0 auto;padding:0 2rem;}
-.nav-list{display:flex;list-style:none;flex-wrap:wrap;justify-content:center;}
-.nav-list li{position:relative;}
-.nav-list li a{display:block;padding:0.85rem 1.1rem;color:var(--cream);text-decoration:none;font-weight:600;font-size:0.85rem;letter-spacing:0.5px;text-transform:uppercase;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);white-space:nowrap;position:relative;}
-.nav-list li a::after{content:'';position:absolute;bottom:6px;left:50%;width:0;height:2px;background:var(--gold);transition:all 0.25s cubic-bezier(0.4,0,0.2,1);transform:translateX(-50%);border-radius:1px;}
-.nav-list li:hover > a{color:var(--gold);background:rgba(201,162,39,0.08);}
-.nav-list li:hover > a::after{width:60%;}
-.nav-list li.current > a{color:var(--gold);}
-.nav-list li.current > a::after{width:60%;}
-.dropdown{display:none;position:absolute;top:100%;left:0;background:rgba(26,46,18,0.95);min-width:260px;list-style:none;box-shadow:0 20px 50px rgba(0,0,0,0.5);border-radius:0 0 12px 12px;overflow:hidden;border-top:2px solid var(--gold);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);animation:dropdownIn 0.25s cubic-bezier(0.4,0,0.2,1);}
-.dropdown .dropdown{top:0;left:100%;border-radius:0 12px 12px 0;}
-.nav-list li:hover > .dropdown{display:block;}
-.dropdown li a{padding:0.85rem 1.4rem;font-size:0.82rem;border-bottom:1px solid rgba(255,255,255,0.04);text-transform:none;font-weight:500;letter-spacing:0.3px;}
-.dropdown li a::after{display:none;}
-.dropdown li a:hover{background:rgba(201,162,39,0.12);padding-left:1.8rem;color:var(--gold-light);}
-@keyframes dropdownIn{from{opacity:0;transform:translateY(-8px) scale(0.98);}to{opacity:1;transform:translateY(0) scale(1);}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
-.page-header-banner{position:relative;height:520px;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:2;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.page-header-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(15,31,10,0.4) 0%, rgba(15,31,10,0.1) 50%, rgba(15,31,10,0.6) 100%);z-index:1;}
-.header-overlay{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(15,31,10,0.2) 0%, rgba(15,31,10,0.5) 60%, rgba(15,31,10,0.85) 100%);z-index:2;}
-.header-content{position:relative;z-index:3;text-align:center;padding:2rem;animation:heroReveal 1s cubic-bezier(0.4,0,0.2,1) forwards;}
-.page-title{font-family:'Cinzel',serif;font-size:3.8rem;font-weight:700;color:#fff;text-shadow:0 8px 32px rgba(0,0,0,0.4);letter-spacing:3px;text-transform:uppercase;line-height:1.1;position:relative;}
-.page-title::after{content:'';display:block;width:80px;height:3px;background:var(--gold);margin:1.5rem auto 0;border-radius:2px;box-shadow:0 0 20px rgba(201,162,39,0.4);}
-@keyframes heroReveal{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-.main-content{max-width:1200px;margin:0 auto;padding:4rem 2rem 5rem;position:relative;z-index:2;}
-.content-card{background:var(--glass-bg);padding:3.5rem;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.15),0 1px 3px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.3);backdrop-filter:blur(12px) saturate(1.1);-webkit-backdrop-filter:blur(12px) saturate(1.1);border:1px solid var(--glass-border);animation:cardReveal 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;}
-@keyframes cardReveal{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
-.content-card img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s ease;display:block;margin:1.5rem 0;}
-.content-card img:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.2);}
-.content-card h1,.content-card h2,.content-card h3{font-family:'Cinzel',serif;color:var(--forest);margin:2rem 0 1rem;line-height:1.25;position:relative;}
-.content-card h1{font-size:2.6rem;}
-.content-card h1::after{content:'';display:block;width:60px;height:3px;background:var(--gold);margin-top:0.75rem;border-radius:2px;}
-.content-card h2{font-size:2rem; color:var(--saddle);}
-.content-card h3{font-size:1.5rem;}
-.content-card p{margin-bottom:1.4rem;font-size:1.08rem;color:var(--text);line-height:1.8;}
-.content-card a{color:var(--saddle);font-weight:600;text-decoration:none;border-bottom:2px solid transparent;transition:all 0.25s ease;position:relative;}
-.content-card a:hover{border-bottom-color:var(--gold);color:var(--saddle-light);}
-.content-card ul,.content-card ol{margin-left:2rem;margin-bottom:1.4rem;}
-.content-card li{margin-bottom:0.6rem;line-height:1.7;}
-.content-card blockquote{border-left:4px solid var(--gold);padding:1rem 1.5rem;margin:2rem 0;font-style:italic;color:var(--text-light);background:rgba(201,162,39,0.06);border-radius:0 12px 12px 0;}
-.content-card hr{border:none;height:1px;background:linear-gradient(90deg, transparent, var(--cream-dark), transparent);margin:2.5rem 0;}
-.content-card > div > section{margin-bottom:2.5rem;animation:sectionReveal 0.6s cubic-bezier(0.4,0,0.2,1) both;}
-.content-card > div > section:nth-child(1){animation-delay:0.1s;}
-.content-card > div > section:nth-child(2){animation-delay:0.2s;}
-.content-card > div > section:nth-child(3){animation-delay:0.3s;}
-.content-card > div > section:nth-child(4){animation-delay:0.4s;}
-.content-card > div > section:nth-child(5){animation-delay:0.5s;}
-.content-card > div > section:nth-child(6){animation-delay:0.6s;}
-@keyframes sectionReveal{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.site-footer{background:linear-gradient(180deg, rgba(15,31,10,0.95) 0%, var(--forest-dark) 100%);color:var(--cream-dark);padding:4rem 2rem 3rem;text-align:center;position:relative;z-index:2;border-top:1px solid var(--glass-border);backdrop-filter:blur(10px);}
-.site-footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--gold);border-radius:0 0 3px 3px;}
-.site-footer p{margin-bottom:0.5rem;font-size:0.95rem;opacity:0.9;}
-.site-footer a{color:var(--gold-light);text-decoration:none;transition:all 0.25s ease;position:relative;}
-.site-footer a:hover{color:#fff;text-shadow:0 0 8px rgba(201,162,39,0.4);}
-.footer-social{margin-top:2rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
-.footer-social a{display:inline-flex;align-items:center;gap:0.5rem;margin:0;padding:0.65rem 1.4rem;background:rgba(201,162,39,0.1);border:1px solid var(--glass-border);border-radius:50px;font-size:0.9rem;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);backdrop-filter:blur(4px);}
-.footer-social a:hover{background:var(--gold);color:var(--forest-dark);border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 20px rgba(201,162,39,0.3);}
-@media (max-width:900px){
-  .nav-list{display:none;flex-direction:column;width:100%;background:rgba(15,31,10,0.98);padding:0.5rem 0;border-radius:0 0 12px 12px;backdrop-filter:blur(20px);}
-  .nav-list.active{display:flex;animation:dropdownIn 0.3s ease;}
-  .nav-toggle{display:block;margin-left:auto;}
-  .dropdown{position:static;display:none;box-shadow:none;width:100%;border-top:none;border-radius:0;background:rgba(15,31,10,0.95);backdrop-filter:none;}
-  .dropdown .dropdown{left:0;border-radius:0;}
-  .nav-list li:hover > .dropdown{display:none;}
-  .nav-list li.open > .dropdown{display:block;animation:dropdownIn 0.2s ease;}
-  .page-header-banner{height:380px;}
-  .page-title{font-size:2.4rem;}
-  .content-card{padding:2rem;border-radius:16px;}
-  .header-inner{padding:0.75rem 1rem;}
-  .main-content{padding:2.5rem 1rem 3.5rem;}
-}
-@media (max-width:600px){
-  .page-title{font-size:1.8rem;}
-  .page-title::after{margin-top:1rem;}
-  .content-card{padding:1.5rem;}
-  .content-card h1{font-size:1.9rem;}
-  .content-card h2{font-size:1.5rem;}
-  .content-card h3{font-size:1.2rem;}
-  .main-content{padding:2rem 0.75rem 3rem;}
-  .phone-tag{font-size:0.9rem;}
-  .site-header{position:relative;}
-  .main-nav{position:relative;top:0;}
-  .page-header-banner{height:300px;}
-}</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/06ae721a_981216548.png" type="image/png">
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
-
-<!-- Maps Background -->
-<iframe class="maps-bg"
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12599.638614214104!2d-106.3113889!3d39.2508333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876a3e9e6c0e8e6f%3A0x5e8b5f5e5e5e5e5e!2sLeadville%2C%20CO%2080461!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-<div class="maps-overlay"></div>
+<div class="bg-texture"></div>
 
 <!-- Header -->
 <header class="site-header">
   <div class="header-inner">
     <div class="site-logo">
-      <a href="../index.html"><img src="../images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a>
+      <a href="index.html"><img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a>
     </div>
-    <div class="phone-tag">For Booking: (719) 486-4570</div>
-    <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-list').classList.toggle('active')">&#9776;</button>
+    <div class="phone-tag"><span>For Booking: (719) 486-4570</span></div>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
   </div>
 </header>
 
@@ -153,77 +28,77 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);line-height:1.7;ba
 <nav class="main-nav">
   <div class="nav-inner">
     <ul class="nav-list">
-      <li><a href="../index.html">Home</a></li>
-<li class="has-dropdown"><a href="../stagecoach.html">Stagecoach</a><ul class="dropdown depth-0">
-<li><a href="../rides/wagon-rides.html">Wagon Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../rides.html">Riding</a><ul class="dropdown depth-0">
-<li><a href="../rides/full-day-horseback-rides.html">Full Day Horseback Rides</a></li>
-<li><a href="../rides/hourly-to-half-day.html">Hourly To Half Day</a></li>
-<li><a href="../rides/cavecreek-horseback-rides.html">Winter Horseback Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../camping.html">Camping</a><ul class="dropdown depth-0">
-<li><a href="../camping/guided-horse-camping.html">Guided Horse Camping</a></li>
-<li><a href="../camping/horse-camping.html">Horse Camping</a></li>
-<li><a href="../camping/pack-service-summer.html">Pack Service</a></li>
-<li><a href="../camping/summer-drop-camps.html">Summer Drop Camps</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../hunting.html">Hunting</a><ul class="dropdown depth-0">
-<li><a href="../hunting/colorado-hunting-units.html">Colorado Hunting Units</a></li>
-<li><a href="../hunting/hunting-services.html">Hunting Services</a></li>
-<li class="has-dropdown has-submenu"><a href="../hunting/game.html">Game</a><ul class="dropdown depth-1">
-<li><a href="../hunting/game/antelope-hunt.html">Antelope Hunt</a></li>
-<li><a href="../hunting/game/bear-hunt-2.html">Bear Hunt</a></li>
-<li><a href="../hunting/game/elk-hunt-2.html">Elk Hunt</a></li>
-<li><a href="../hunting/game/moose-hunt-2.html">Moose Hunt</a></li>
-<li><a href="../hunting/game/mountain-lion-hunts.html">Mountain Lion Hunts</a></li>
-<li><a href="../hunting/game/mule-deer-hunt.html">Mule Deer Hunt</a></li>
-</ul></li>
-</ul></li>
-<li class="has-dropdown"><a href="../fishing.html">Fishing</a><ul class="dropdown depth-0">
-<li><a href="../fishing/alpine-lakes.html">Alpine Lakes</a></li>
-<li><a href="../fishing/eagle-river.html">Eagle River</a></li>
-<li><a href="../fishing/lake-fishing.html">Lake Fishing</a></li>
-</ul></li>
-<li><a href="../training-center.html">Training Center</a></li>
-<li class="has-dropdown"><a href="../gallery.html">Gallery</a><ul class="dropdown depth-0">
-<li><a href="../gallery/fishing-photos.html">Fishing Photos</a></li>
-<li><a href="../gallery/hunting-photos.html">Hunting Photos</a></li>
-<li><a href="../gallery/horseback-riding-photos.html">Horseback Riding Photos</a></li>
-<li><a href="../gallery/summer-camp-photos.html">Summer Camp Photos</a></li>
-<li><a href="../gallery/videos.html">Videos</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../about.html">About</a><ul class="dropdown depth-0">
-<li><a href="../about/tom-burch.html">Tom Burch</a></li>
-<li><a href="../about/anita-percifield.html">Anita Percifield</a></li>
-<li><a href="../about/ben-roehrs.html">Ben Roehrs</a></li>
-<li><a href="../about/charlie-howard.html">Charlie Howard</a></li>
-<li><a href="../about/jake-skobel.html">Jake Skobel</a></li>
-<li><a href="../about/keiley-smith.html">Keiley Smith</a></li>
-<li><a href="../about/luke-talley.html">Luke Talley</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="#">Booking</a><ul class="dropdown depth-0">
-<li><a href="../user-registration.html">Employee</a></li>
-<li><a href="../reservations.html">Reservation</a></li>
-<li><a href="../pay-at-checkin.html">Pay at checkin</a></li>
-</ul></li>
-<li><a href="../contact.html">Contact</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li class="has-dropdown"><a href="stagecoach.html">Stagecoach</a><ul class="dropdown depth-0">
+        <li><a href="rides/wagon-rides.html">Wagon Rides</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="rides.html">Riding</a><ul class="dropdown depth-0">
+        <li><a href="rides/full-day-horseback-rides.html">Full Day Horseback Rides</a></li>
+        <li><a href="rides/hourly-to-half-day.html">Hourly To Half Day</a></li>
+        <li><a href="rides/cavecreek-horseback-rides.html">Winter Horseback Rides</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="camping.html">Camping</a><ul class="dropdown depth-0">
+        <li><a href="camping/guided-horse-camping.html">Guided Horse Camping</a></li>
+        <li><a href="camping/horse-camping.html">Horse Camping</a></li>
+        <li><a href="camping/pack-service-summer.html">Pack Service</a></li>
+        <li><a href="camping/summer-drop-camps.html">Summer Drop Camps</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="hunting.html">Hunting</a><ul class="dropdown depth-0">
+        <li><a href="hunting/colorado-hunting-units.html">Colorado Hunting Units</a></li>
+        <li><a href="hunting/hunting-services.html">Hunting Services</a></li>
+        <li class="has-dropdown has-submenu"><a href="hunting/game.html">Game</a><ul class="dropdown depth-1">
+          <li><a href="hunting/game/antelope-hunt.html">Antelope Hunt</a></li>
+          <li><a href="hunting/game/bear-hunt-2.html">Bear Hunt</a></li>
+          <li><a href="hunting/game/elk-hunt-2.html">Elk Hunt</a></li>
+          <li><a href="hunting/game/moose-hunt-2.html">Moose Hunt</a></li>
+          <li><a href="hunting/game/mountain-lion-hunts.html">Mountain Lion Hunts</a></li>
+          <li><a href="hunting/game/mule-deer-hunt.html">Mule Deer Hunt</a></li>
+        </ul></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="fishing.html">Fishing</a><ul class="dropdown depth-0">
+        <li><a href="fishing/alpine-lakes.html">Alpine Lakes</a></li>
+        <li><a href="fishing/eagle-river.html">Eagle River</a></li>
+        <li><a href="fishing/lake-fishing.html">Lake Fishing</a></li>
+      </ul></li>
+      <li><a href="training-center.html">Training Center</a></li>
+      <li class="has-dropdown"><a href="gallery.html">Gallery</a><ul class="dropdown depth-0">
+        <li><a href="gallery/fishing-photos.html">Fishing Photos</a></li>
+        <li><a href="gallery/hunting-photos.html">Hunting Photos</a></li>
+        <li><a href="gallery/horseback-riding-photos.html">Horseback Riding Photos</a></li>
+        <li><a href="gallery/summer-camp-photos.html">Summer Camp Photos</a></li>
+        <li><a href="gallery/videos.html">Videos</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="about.html">About</a><ul class="dropdown depth-0">
+        <li><a href="about/tom-burch.html">Tom Burch</a></li>
+        <li><a href="about/anita-percifield.html">Anita Percifield</a></li>
+        <li><a href="about/ben-roehrs.html">Ben Roehrs</a></li>
+        <li><a href="about/charlie-howard.html">Charlie Howard</a></li>
+        <li><a href="about/jake-skobel.html">Jake Skobel</a></li>
+        <li><a href="about/keiley-smith.html">Keiley Smith</a></li>
+        <li><a href="about/luke-talley.html">Luke Talley</a></li>
+      </ul></li>
+      <li class="has-dropdown"><a href="#">Booking</a><ul class="dropdown depth-0">
+        <li><a href="user-registration.html">Employee</a></li>
+        <li><a href="reservations.html">Reservation</a></li>
+        <li><a href="pay-at-checkin.html">Pay at checkin</a></li>
+      </ul></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="page-header-banner" style="background-image:url('https://halfmoonpacking.com/wp-content/uploads/2020/01/guided-hunts-colorado.jpg');">
-            <div class="header-overlay"></div>
-            <div class="header-content">
-                <h1 class="page-title">Professional Hunting Services</h1>
-            </div>
-        </div>
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <h1 class="page-title">Professional Hunting Services</h1>
+  </div>
+  <div class="scroll-indicator">Scroll</div>
+</div>
 
 <!-- Main Content -->
 <main class="main-content">
   <div class="content-card">
     <div>
-
 <section>
 
 <h1>HUNTING SERVICES</h1> 
@@ -298,35 +173,44 @@ GAME RETRIEVAL COLORADO
 <p>The price is $625 or $425 if you used our pack service to get your camp set. Game Retrieval is included in your guided hunt or drop camp hunt at no charge.</p> 
 
 </section>
-</div>
+    </div>
   </div>
 </main>
 
 <!-- Footer -->
 <footer class="site-footer">
-  <p>&copy; Halfmoon Packing & Outfitting, LLC. All rights reserved.</p>
-  <p>1100 East Tennessee Rd, Leadville, CO 80461 | <a href="tel:7194864570">(719) 486-4570</a></p>
-  <div class="footer-social">
-    <a href="https://www.facebook.com/halfmoonpacking" target="_blank">Facebook</a>
-    <a href="https://www.instagram.com/halfmoonpacking/" target="_blank">Instagram</a>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting">
+      <p>Colorado's premier outfitter for horseback riding, camping, hunting, and fishing adventures in the Rocky Mountains.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/halfmoonpacking" target="_blank" aria-label="Facebook">FB</a>
+        <a href="https://www.instagram.com/halfmoonpacking/" target="_blank" aria-label="Instagram">IG</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Adventures</h4>
+      <a href="rides.html">Horseback Riding</a>
+      <a href="camping.html">Camping</a>
+      <a href="hunting.html">Hunting</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="stagecoach.html">Stagecoach</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">About Us</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="training-center.html">Training Center</a>
+      <a href="contact.html">Contact</a>
+      <a href="reservations.html">Book Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Halfmoon Packing & Outfitting, LLC. All rights reserved.</p>
+    <p>1100 East Tennessee Rd, Leadville, CO 80461 | <a href="tel:7194864570">(719) 486-4570</a></p>
   </div>
 </footer>
 
-<script>
-// Mobile dropdown toggles
-document.querySelectorAll('.has-dropdown > a').forEach(function(a){
-  a.addEventListener('click', function(e){
-    if(window.innerWidth <= 900){
-      var li = this.parentElement;
-      var siblingDropdown = li.querySelector('.dropdown');
-      if(siblingDropdown && !li.classList.contains('open')){
-        e.preventDefault();
-        li.classList.add('open');
-      }
-    }
-  });
-});
-</script>
-
+<script src="../script.js"></script>
 </body>
 </html>
