@@ -42,13 +42,12 @@
   const observer=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        entry.target.style.animationPlayState='running';
+        entry.target.classList.add('section-visible');
       }
     });
   },{threshold:0.1});
 
   document.querySelectorAll('.content-card > div > section').forEach(function(sec){
-    sec.style.animationPlayState='paused';
     observer.observe(sec);
   });
 })();
