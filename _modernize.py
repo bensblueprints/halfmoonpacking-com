@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Winter Horseback Riding in Cave Creek, AZ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="../images/06ae721a_981216548.png" type="image/png">
-<style>
-/* ===== CSS VARIABLES ===== */
+import os
+import re
+import glob
+
+NEW_CSS = """/* ===== CSS VARIABLES ===== */
 :root{
   --forest:#1a2e12;
   --forest-light:#2d4a1e;
@@ -127,163 +120,32 @@ body{font-family:'Source Sans 3',sans-serif;color:var(--text);line-height:1.7;ba
   .site-header{position:relative;}
   .main-nav{position:relative;top:0;}
   .page-header-banner{height:300px;}
-}</style>
-</head>
-<body>
+}"""
 
-<!-- Maps Background -->
-<iframe class="maps-bg"
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12599.638614214104!2d-106.3113889!3d39.2508333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876a3e9e6c0e8e6f%3A0x5e8b5f5e5e5e5e5e!2sLeadville%2C%20CO%2080461!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-<div class="maps-overlay"></div>
+def replace_css_in_file(filepath):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    pattern = r'(<style>)(.*?)(</style>)'
+    replacement = r'\1\n' + NEW_CSS + r'\3'
+    new_content = re.sub(pattern, replacement, content, count=1, flags=re.DOTALL)
+    if new_content == content:
+        print(f'  WARNING: No CSS replacement in {filepath}')
+        return False
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(new_content)
+    return True
 
-<!-- Header -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="site-logo">
-      <a href="../index.html"><img src="../images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a>
-    </div>
-    <div class="phone-tag">For Booking: (719) 486-4570</div>
-    <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-list').classList.toggle('active')">&#9776;</button>
-  </div>
-</header>
+def main():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    html_files = glob.glob(os.path.join(base_dir, '**', '*.html'), recursive=True)
+    print(f'Found {len(html_files)} HTML files')
+    success_count = 0
+    for filepath in sorted(html_files):
+        rel_path = os.path.relpath(filepath, base_dir)
+        print(f'Processing: {rel_path}')
+        if replace_css_in_file(filepath):
+            success_count += 1
+    print(f'\nDone! Updated {success_count}/{len(html_files)} files.')
 
-<!-- Navigation -->
-<nav class="main-nav">
-  <div class="nav-inner">
-    <ul class="nav-list">
-      <li><a href="../index.html">Home</a></li>
-<li class="has-dropdown"><a href="../stagecoach.html">Stagecoach</a><ul class="dropdown depth-0">
-<li><a href="../rides/wagon-rides.html">Wagon Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../rides.html">Riding</a><ul class="dropdown depth-0">
-<li><a href="../rides/full-day-horseback-rides.html">Full Day Horseback Rides</a></li>
-<li><a href="../rides/hourly-to-half-day.html">Hourly To Half Day</a></li>
-<li><a href="../rides/cavecreek-horseback-rides.html">Winter Horseback Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../camping.html">Camping</a><ul class="dropdown depth-0">
-<li><a href="../camping/guided-horse-camping.html">Guided Horse Camping</a></li>
-<li><a href="../camping/horse-camping.html">Horse Camping</a></li>
-<li><a href="../camping/pack-service-summer.html">Pack Service</a></li>
-<li><a href="../camping/summer-drop-camps.html">Summer Drop Camps</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../hunting.html">Hunting</a><ul class="dropdown depth-0">
-<li><a href="../hunting/colorado-hunting-units.html">Colorado Hunting Units</a></li>
-<li><a href="../hunting/hunting-services.html">Hunting Services</a></li>
-<li class="has-dropdown has-submenu"><a href="../hunting/game.html">Game</a><ul class="dropdown depth-1">
-<li><a href="../hunting/game/antelope-hunt.html">Antelope Hunt</a></li>
-<li><a href="../hunting/game/bear-hunt-2.html">Bear Hunt</a></li>
-<li><a href="../hunting/game/elk-hunt-2.html">Elk Hunt</a></li>
-<li><a href="../hunting/game/moose-hunt-2.html">Moose Hunt</a></li>
-<li><a href="../hunting/game/mountain-lion-hunts.html">Mountain Lion Hunts</a></li>
-<li><a href="../hunting/game/mule-deer-hunt.html">Mule Deer Hunt</a></li>
-</ul></li>
-</ul></li>
-<li class="has-dropdown"><a href="../fishing.html">Fishing</a><ul class="dropdown depth-0">
-<li><a href="../fishing/alpine-lakes.html">Alpine Lakes</a></li>
-<li><a href="../fishing/eagle-river.html">Eagle River</a></li>
-<li><a href="../fishing/lake-fishing.html">Lake Fishing</a></li>
-</ul></li>
-<li><a href="../training-center.html">Training Center</a></li>
-<li class="has-dropdown"><a href="../gallery.html">Gallery</a><ul class="dropdown depth-0">
-<li><a href="../gallery/fishing-photos.html">Fishing Photos</a></li>
-<li><a href="../gallery/hunting-photos.html">Hunting Photos</a></li>
-<li><a href="../gallery/horseback-riding-photos.html">Horseback Riding Photos</a></li>
-<li><a href="../gallery/summer-camp-photos.html">Summer Camp Photos</a></li>
-<li><a href="../gallery/videos.html">Videos</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="../about.html">About</a><ul class="dropdown depth-0">
-<li><a href="../about/tom-burch.html">Tom Burch</a></li>
-<li><a href="../about/anita-percifield.html">Anita Percifield</a></li>
-<li><a href="../about/ben-roehrs.html">Ben Roehrs</a></li>
-<li><a href="../about/charlie-howard.html">Charlie Howard</a></li>
-<li><a href="../about/jake-skobel.html">Jake Skobel</a></li>
-<li><a href="../about/keiley-smith.html">Keiley Smith</a></li>
-<li><a href="../about/luke-talley.html">Luke Talley</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="#">Booking</a><ul class="dropdown depth-0">
-<li><a href="../user-registration.html">Employee</a></li>
-<li><a href="../reservations.html">Reservation</a></li>
-<li><a href="../pay-at-checkin.html">Pay at checkin</a></li>
-</ul></li>
-<li><a href="../contact.html">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="page-header-banner" style="background-image:url('https://halfmoonpacking.com/wp-content/uploads/elementor/thumbs/20220109_170851-1-scaled-r0jmvnt63bgogyopfbxegm8h0h1zgh7jd39mft6spw.jpg');">
-            <div class="header-overlay"></div>
-            <div class="header-content">
-                <h1 class="page-title">Winter Horseback Riding in Cave Creek, AZ</h1>
-            </div>
-        </div>
-
-<!-- Main Content -->
-<main class="main-content">
-  <div class="content-card">
-    <section>
-
-<h1>Winter HOrseback rides in Cave CReek , AZ</h1> 
-
-</section>
-<section>
-
-<img alt="Saguaros" src="https://halfmoonpacking.com/wp-content/uploads/elementor/thumbs/20220109_170851-1-scaled-r0jmvnt63bgogyopfbxegm8h0h1zgh7jd39mft6spw.jpg"/> 
-
-<p>The Tonto National Forest is 2.9 million acres with in the Sonoran Desert, the only home of the giant Saguaro Cactus and many Western movies.</p><p>In this unique location we offer exclusive private rides and no 2 rides are the same.  We are not limited to specific trails!  As far as I can tell Wind Walker Expeditions is the only group operating on Federal land in this manner.</p> 
-
-<img alt="Woman Riding on American Quarter Horse" src="https://halfmoonpacking.com/wp-content/uploads/elementor/thumbs/20220321_172358-1-scaled-r0jmwc8z10e4utp7gmhp9g2gghpj0lwk4g88x06k84.jpg"/> 
-
-</section>
-<section>
-
-<div>
-<p>Escape the ordinary and embark on a breathtaking <strong>winter horseback riding</strong> experience in <strong>Cave Creek, AZ</strong>. Whether you’re a seasoned rider or a beginner, our exclusive trail rides take you through the stunning landscapes of the <strong>Tonto National Forest</strong>, home to towering <strong>Saguaro Cacti</strong> and rich Sonoran Desert wildlife.</p>
-<h4><strong>Why Choose Our Cave Creek Horseback Riding Experience?</strong></h4>
-<ul>
-<li><strong>Exclusive Private Rides</strong> – Every ride is a unique adventure, with no two trails being the same.</li>
-<li><strong>Scenic Trails</strong> – Explore the hidden beauty of <strong>Cave Creek, AZ trail rides</strong>, winding through canyons, rivers, and vast desert plains.</li>
-<li><strong>Federal Land Access</strong> – Our rides are among the few that take place on federally protected land, ensuring a pristine, untouched environment.</li>
-<li><strong>Expert Guides</strong> – Our knowledgeable wranglers provide a safe and immersive experience, whether you’re riding for the first time or are an experienced equestrian.</li>
-</ul>
-<div>
-<h4><strong>A True Western Experience in the Heart of Arizona</strong></h4>
-<p>Immerse yourself in an authentic <strong>Cave Creek horseback riding</strong> adventure, where you can witness the rugged beauty of Arizona’s desert landscapes. From sunrise to sunset rides, our horseback tours offer the perfect getaway for families, couples, and solo travelers seeking an unforgettable outdoor experience.</p>
-<p>If you’re searching for <strong>horseback riding in Cave Creek, AZ</strong>, look no further! Whether you’re planning a <strong>horseback r</strong><a href="https://halfmoonpacking.com/camping/guided-horse-camping/">iding vacation in tennessee</a><span style="font-size: inherit; text-align: inherit;">or a day trip to explore the wilderness, our trails promise breathtaking views and unforgettable memories.</span></p>
-<h4><strong>Book Your Horseback Adventure Today!</strong></h4>
-<p>Ready to experience the best of <strong>horseback riding Cave Creek, AZ</strong> has to offer? Book your ride today and discover why our guests rave about this one-of-a-kind adventure!</p>
-</div> </div>
-
-</section>
-  </div>
-</main>
-
-<!-- Footer -->
-<footer class="site-footer">
-  <p>&copy; Halfmoon Packing & Outfitting, LLC. All rights reserved.</p>
-  <p>1100 East Tennessee Rd, Leadville, CO 80461 | <a href="tel:7194864570">(719) 486-4570</a></p>
-  <div class="footer-social">
-    <a href="https://www.facebook.com/halfmoonpacking" target="_blank">Facebook</a>
-    <a href="https://www.instagram.com/halfmoonpacking/" target="_blank">Instagram</a>
-  </div>
-</footer>
-
-<script>
-// Mobile dropdown toggles
-document.querySelectorAll('.has-dropdown > a').forEach(function(a){
-  a.addEventListener('click', function(e){
-    if(window.innerWidth <= 900){
-      var li = this.parentElement;
-      var siblingDropdown = li.querySelector('.dropdown');
-      if(siblingDropdown && !li.classList.contains('open')){
-        e.preventDefault();
-        li.classList.add('open');
-      }
-    }
-  });
-});
-</script>
-
-</body>
-</html>
+if __name__ == '__main__':
+    main()
