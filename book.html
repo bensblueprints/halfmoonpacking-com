@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Adventure | Halfmoon Packing & Outfitting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="images/06ae721a_981216548.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<style>
+.booking-form{max-width:800px;margin:0 auto;background:var(--white);padding:3rem;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
+.booking-form .form-group{margin-bottom:1.5rem}
+.booking-form label{display:block;margin-bottom:0.5rem;font-weight:600;color:var(--forest)}
+.booking-form input,.booking-form select,.booking-form textarea{width:100%;padding:0.85rem 1rem;border:2px solid rgba(0,0,0,0.08);border-radius:var(--radius-sm);font-family:inherit;font-size:1rem;transition:var(--transition);background:var(--cream)}
+.booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,168,67,0.15)}
+.booking-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.booking-form .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+.booking-form .service-option{padding:1rem;border:2px solid rgba(0,0,0,0.08);border-radius:var(--radius-md);cursor:pointer;transition:var(--transition);text-align:center}
+.booking-form .service-option:hover{border-color:var(--gold);background:rgba(212,168,67,0.05)}
+.booking-form .service-option.selected{border-color:var(--gold);background:rgba(212,168,67,0.1);box-shadow:var(--shadow-gold)}
+.booking-form .service-option input{display:none}
+.booking-form .service-option h4{font-family:'Cinzel',serif;color:var(--forest);margin-bottom:0.25rem}
+.booking-form .service-option p{font-size:0.85rem;color:var(--text-light);margin:0}
+.booking-form button[type=submit]{width:100%;padding:1.2rem;background:var(--forest);color:var(--cream);border:none;border-radius:50px;font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:var(--transition)}
+.booking-form button[type=submit]:hover{background:var(--gold);color:var(--forest);transform:translateY(-3px);box-shadow:var(--shadow-gold)}
+.booking-form .success-msg{display:none;text-align:center;padding:3rem;background:rgba(45,90,34,0.05);border-radius:var(--radius-lg);border:2px solid var(--forest-light)}
+.booking-form .success-msg h2{color:var(--forest);font-family:'Cinzel',serif}
+@media(max-width:600px){.booking-form .form-row{grid-template-columns:1fr}.booking-form{padding:1.5rem}}
+</style>
+</head>
+<body>
+<div class="bg-texture"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-logo"><a href="index.html"><img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a></div>
+    <div class="phone-tag"><span>For Booking: (719) 486-4570</span></div>
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <ul class="nav-list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stagecoach.html">Stagecoach</a></li>
+      <li><a href="rides.html">Riding</a></li>
+      <li><a href="camping.html">Camping</a></li>
+      <li><a href="hunting.html">Hunting</a></li>
+      <li><a href="fishing.html">Fishing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li class="current"><a href="book.html">Book Now</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header-banner" style="background-image:url('images/08a2e9a6_horse-riding-scaled.jpg');min-height:50vh;">
+  <div class="header-overlay"></div>
+  <div class="header-content">
+    <h1 class="page-title">Book Your Adventure</h1>
+    <p style="color:rgba(255,255,255,0.9);font-size:1.2rem;max-width:600px;margin:0 auto">Reserve your horseback ride, camping trip, hunting expedition, or fishing adventure in the Colorado Rockies.</p>
+  </div>
+</div>
+
+<main class="main-content">
+  <div class="content-card">
+    <section>
+      <h2 style="text-align:center">Choose Your Experience</h2>
+      <p style="text-align:center;max-width:600px;margin:0 auto 2rem">Select the adventure that calls to you. We will confirm your reservation by phone within 24 hours.</p>
+    </section>
+
+    <section>
+      <form id="bookingForm" class="booking-form">
+        <div class="service-grid">
+          <label class="service-option"><input type="radio" name="services" value="stagecoach_ride" required><h4>Stagecoach Ride</h4><p>Scenic wagon tours</p></label>
+          <label class="service-option"><input type="radio" name="services" value="horseback_ride"><h4>Horseback Riding</h4><p>Hourly to full day</p></label>
+          <label class="service-option"><input type="radio" name="services" value="camping"><h4>Horse Camping</h4><p>Guided & drop camps</p></label>
+          <label class="service-option"><input type="radio" name="services" value="hunting"><h4>Hunting Trip</h4><p>Elk, deer, bear & more</p></label>
+          <label class="service-option"><input type="radio" name="services" value="fishing"><h4>Fishing Trip</h4><p>Alpine lakes & rivers</p></label>
+          <label class="service-option"><input type="radio" name="services" value="training"><h4>Training Center</h4><p>Learn to ride & pack</p></label>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date_of_trip">Date of Trip *</label>
+            <input type="date" name="date_of_trip" id="date_of_trip" required>
+          </div>
+          <div class="form-group">
+            <label for="booking_time">Preferred Time</label>
+            <select name="booking_time" id="booking_time">
+              <option value="">Select time</option>
+              <option value="morning">Morning (8am - 12pm)</option>
+              <option value="afternoon">Afternoon (12pm - 5pm)</option>
+              <option value="full_day">Full Day</option>
+              <option value="multi_day">Multi-Day</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="number_of_adults">Adults *</label>
+            <select name="number_of_adults" id="number_of_adults" required>
+              <option value="">Select</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+              <option value="10">10+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="number_of_kids">Kids (under 12)</label>
+            <select name="number_of_kids" id="number_of_kids">
+              <option value="0">0</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name *</label>
+            <input type="text" name="first_name" id="first_name" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name *</label>
+            <input type="text" name="last_name" id="last_name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" name="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Phone *</label>
+            <input type="tel" name="telephone" id="telephone" placeholder="(719) 486-4570" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <div class="form-row">
+            <input type="text" name="street" placeholder="Street">
+            <input type="text" name="city" placeholder="City">
+          </div>
+          <div class="form-row" style="margin-top:1rem">
+            <input type="text" name="state" placeholder="State" style="flex:1">
+            <input type="text" name="zip_code" placeholder="ZIP" style="flex:1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Payment Preference</label>
+          <select name="payment_type">
+            <option value="pay_at_checkin">Pay at Check-In</option>
+            <option value="request_a_call">Request a Call for Deposit</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additional_comments">Additional Comments</label>
+          <textarea name="additional_comments" id="additional_comments" rows="4" placeholder="Tell us about any special needs, dietary restrictions, experience level, etc."></textarea>
+        </div>
+
+        <button type="submit">Submit Reservation Request</button>
+      </form>
+
+      <div id="successMsg" class="success-msg">
+        <h2>Reservation Request Received</h2>
+        <p>Thank you for booking with Halfmoon Packing & Outfitting. We will call you within 24 hours at the number you provided to confirm your reservation and discuss details.</p>
+        <p style="margin-top:1rem"><strong>Questions? Call us at (719) 486-4570</strong></p>
+        <p style="margin-top:1rem"><a href="index.html" style="display:inline-block;margin-top:1rem;padding:0.8rem 2rem;background:var(--forest);color:var(--cream);border-radius:50px;text-decoration:none;font-weight:600">Back to Home</a></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting">
+      <p>Colorado's premier outfitter for horseback riding, camping, hunting, and fishing adventures in the Rocky Mountains.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Adventures</h4>
+      <a href="rides.html">Horseback Riding</a>
+      <a href="camping.html">Camping</a>
+      <a href="hunting.html">Hunting</a>
+      <a href="fishing.html">Fishing</a>
+      <a href="stagecoach.html">Stagecoach</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">About Us</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html">Book Now</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; Halfmoon Packing & Outfitting, LLC. All rights reserved.</p>
+    <p>1100 East Tennessee Rd, Leadville, CO 80461 | <a href="tel:7194864570">(719) 486-4570</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+document.querySelectorAll('.service-option').forEach(opt => {
+  opt.addEventListener('click', function() {
+    document.querySelectorAll('.service-option').forEach(o => o.classList.remove('selected'));
+    this.classList.add('selected');
+    this.querySelector('input').checked = true;
+  });
+});
+
+document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type=submit]');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    const res = await fetch('http://212.28.184.24:3001/api/bookings', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    const json = await res.json();
+    if (json.success) {
+      this.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    } else {
+      alert('Error: ' + json.error);
+      btn.textContent = 'Submit Reservation Request';
+      btn.disabled = false;
+    }
+  } catch(err) {
+    alert('Network error. Please call (719) 486-4570 to book.');
+    btn.textContent = 'Submit Reservation Request';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

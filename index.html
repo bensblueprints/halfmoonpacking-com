@@ -3,263 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halfmoon Packing  Outfitting | Horse Camping in Colorado | Halfmoon Packing & Outfitting</title>
+<title>Halfmoon Packing & Outfitting | Horseback Adventures in Colorado</title>
+<meta name="description" content="Colorado's premier outfitter for horseback riding, camping, hunting, and fishing in the Rocky Mountains. Book your adventure today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="images/06ae721a_981216548.png" type="image/png">
 <link rel="stylesheet" href="style.css">
+<style>
+.hero-home{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0d1f0a 0%,#1a3a14 50%,#2d5a22 100%)}
+.hero-home::before{content:'';position:absolute;inset:0;background:url('images/08a2e9a6_horse-riding-scaled.jpg') center/cover no-repeat;opacity:0.35}
+.hero-home::after{content:'';position:absolute;bottom:0;left:0;right:0;height:300px;background:linear-gradient(to top,var(--forest),transparent)}
+.hero-content{position:relative;z-index:3;text-align:center;padding:2rem;max-width:900px;animation:heroUp 1.2s ease forwards}
+.hero-content h1{font-family:'Cinzel',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:700;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,0.5);letter-spacing:3px;text-transform:uppercase;line-height:1.1;margin-bottom:1.5rem}
+.hero-content h1::after{content:'';display:block;width:120px;height:3px;background:var(--gold);margin:1.5rem auto 0;border-radius:2px;box-shadow:0 0 30px rgba(212,168,67,0.5);animation:growLine 1s ease .8s both}
+.hero-content p{color:rgba(255,255,255,0.9);font-size:clamp(1.1rem,2.5vw,1.4rem);max-width:700px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-cta{display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.hero-cta a{display:inline-block;padding:1rem 2.5rem;background:var(--gold);color:var(--forest);border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:0.95rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:var(--transition);box-shadow:0 8px 30px rgba(212,168,67,0.3)}
+.hero-cta a:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(212,168,67,0.4);background:var(--gold-light)}
+.hero-cta a.secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.4);box-shadow:none}
+.hero-cta a.secondary:hover{border-color:var(--gold);color:var(--gold)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+.feature-card{background:var(--white);border-radius:var(--radius-lg);padding:2.5rem 2rem;text-align:center;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);transition:var(--transition)}
+.feature-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-md);border-color:rgba(212,168,67,0.2)}
+.feature-card img{width:100%;height:180px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:1.5rem}
+.feature-card h3{font-family:'Cinzel',serif;color:var(--forest);margin-bottom:0.75rem;font-size:1.15rem}
+.feature-card p{font-size:0.95rem;color:var(--text-light);margin-bottom:1.25rem}
+.feature-card a{display:inline-block;padding:0.6rem 1.5rem;background:var(--forest);color:var(--cream);border-radius:50px;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;text-decoration:none;font-weight:600;transition:var(--transition)}
+.feature-card a:hover{background:var(--gold);color:var(--forest)}
+.about-preview{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:0 auto}
+.about-preview img{width:100%;height:auto;max-height:450px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg)}
+.about-preview h2{font-family:'Cinzel',serif;color:var(--forest);font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:1rem}
+.about-preview p{font-size:1.05rem;color:var(--text);line-height:1.8;margin-bottom:1.5rem}
+.cta-section{text-align:center;background:linear-gradient(135deg,var(--forest-mid),var(--forest-light));color:#fff;padding:5rem 2rem;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:url('images/02ec858c_img_h06-2048x1365.jpg') center/cover no-repeat;opacity:0.15}
+.cta-section>*{position:relative;z-index:2}
+.cta-section h2{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1rem}
+.cta-section p{font-size:1.1rem;color:rgba(255,255,255,0.85);max-width:600px;margin:0 auto 2rem}
+@media(max-width:800px){.about-preview{grid-template-columns:1fr;gap:2rem}.hero-cta{flex-direction:column;align-items:stretch}}
+</style>
 </head>
 <body>
 <div class="bg-texture"></div>
 
-<!-- Header -->
 <header class="site-header">
   <div class="header-inner">
-    <div class="site-logo">
-      <a href="index.html"><img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a>
-    </div>
+    <div class="site-logo"><a href="index.html"><img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting"></a></div>
     <div class="phone-tag"><span>For Booking: (719) 486-4570</span></div>
     <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
   </div>
 </header>
 
-<!-- Navigation -->
 <nav class="main-nav">
   <div class="nav-inner">
     <ul class="nav-list">
-<li><a href="index.html">Home</a></li>
-<li class="has-dropdown"><a href="stagecoach.html">Stagecoach</a><ul class="dropdown depth-0">
-<li><a href="rides/wagon-rides.html">Wagon Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="rides.html">Riding</a><ul class="dropdown depth-0">
-<li><a href="rides/full-day-horseback-rides.html">Full Day Horseback Rides</a></li>
-<li><a href="rides/hourly-to-half-day.html">Hourly To Half Day</a></li>
-<li><a href="rides/cavecreek-horseback-rides.html">Winter Horseback Rides</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="camping.html">Camping</a><ul class="dropdown depth-0">
-<li><a href="camping/guided-horse-camping.html">Guided Horse Camping</a></li>
-<li><a href="camping/horse-camping.html">Horse Camping</a></li>
-<li><a href="camping/pack-service-summer.html">Pack Service</a></li>
-<li><a href="camping/summer-drop-camps.html">Summer Drop Camps</a></li>
-</ul></li>
-<li class="has-dropdown has-submenu"><a href="hunting.html">Hunting</a><ul class="dropdown depth-0">
-<li><a href="hunting/colorado-hunting-units.html">Colorado Hunting Units</a></li>
-<li><a href="hunting/hunting-services.html">Hunting Services</a></li>
-<li class="has-dropdown"><a href="hunting/game.html">Game</a><ul class="dropdown depth-1">
-<li><a href="hunting/game/antelope-hunt.html">Antelope Hunt</a></li>
-<li><a href="hunting/game/bear-hunt-2.html">Bear Hunt</a></li>
-<li><a href="hunting/game/elk-hunt-2.html">Elk Hunt</a></li>
-<li><a href="hunting/game/moose-hunt-2.html">Moose Hunt</a></li>
-<li><a href="hunting/game/mountain-lion-hunts.html">Mountain Lion Hunts</a></li>
-<li><a href="hunting/game/mule-deer-hunt.html">Mule Deer Hunt</a></li>
-</ul></li>
-</ul></li>
-<li class="has-dropdown"><a href="fishing.html">Fishing</a><ul class="dropdown depth-0">
-<li><a href="fishing/alpine-lakes.html">Alpine Lakes</a></li>
-<li><a href="fishing/eagle-river.html">Eagle River</a></li>
-<li><a href="fishing/lake-fishing.html">Lake Fishing</a></li>
-</ul></li>
-<li><a href="training-center.html">Training Center</a></li>
-<li class="has-dropdown"><a href="gallery.html">Gallery</a><ul class="dropdown depth-0">
-<li><a href="gallery/fishing-photos.html">Fishing Photos</a></li>
-<li><a href="gallery/hunting-photos.html">Hunting Photos</a></li>
-<li><a href="gallery/horseback-riding-photos.html">Horseback Riding Photos</a></li>
-<li><a href="gallery/summer-camp-photos.html">Summer Camp Photos</a></li>
-<li><a href="gallery/videos.html">Videos</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="about.html">About</a><ul class="dropdown depth-0">
-<li><a href="about/tom-burch.html">Tom Burch</a></li>
-<li><a href="about/anita-percifield.html">Anita Percifield</a></li>
-<li><a href="about/ben-roehrs.html">Ben Roehrs</a></li>
-<li><a href="about/charlie-howard.html">Charlie Howard</a></li>
-<li><a href="about/jake-skobel.html">Jake Skobel</a></li>
-<li><a href="about/keiley-smith.html">Keiley Smith</a></li>
-<li><a href="about/luke-talley.html">Luke Talley</a></li>
-</ul></li>
-<li class="has-dropdown"><a href="#">Booking</a><ul class="dropdown depth-0">
-<li><a href="user-registration.html">Employee</a></li>
-<li><a href="reservations.html">Reservation</a></li>
-<li><a href="pay-at-checkin.html">Pay at checkin</a></li>
-</ul></li>
-<li><a href="contact.html">Contact</a></li>
-
+      <li class="current"><a href="index.html">Home</a></li>
+      <li><a href="stagecoach.html">Stagecoach</a></li>
+      <li><a href="rides.html">Riding</a></li>
+      <li><a href="camping.html">Camping</a></li>
+      <li><a href="hunting.html">Hunting</a></li>
+      <li><a href="fishing.html">Fishing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="book.html">Book Now</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="page-header-banner" style="background-image:url('https://halfmoonpacking.com/wp-content/uploads/2019/12/StagecoachImg.png');">
-  <div class="header-overlay"></div>
-  <div class="header-content">
-    <h1 class="page-title">Colorado Wilderness Adventures</h1>
+<section class="hero-home">
+  <div class="hero-content">
+    <h1>Halfmoon Packing & Outfitting</h1>
+    <p>Experience the Colorado Rockies the way they were meant to be seen — from the back of a horse. Guided rides, backcountry camping, world-class hunting, and alpine fishing since 1998.</p>
+    <div class="hero-cta">
+      <a href="book.html">Book Your Adventure</a>
+      <a href="rides.html" class="secondary">Explore Rides</a>
+    </div>
   </div>
-  <div class="scroll-indicator">Scroll</div>
-</div>
+</section>
 
-<!-- Main Content -->
 <main class="main-content">
   <div class="content-card">
-    <div>
-<section>
-<h1>Halfmoon Packing & Outfitting LLC</h1>
+    <section>
+      <h2 style="text-align:center;margin-bottom:3rem">Our Adventures</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <img src="images/089ea934_horse-riding-1536x1024.jpg" alt="Horseback Riding">
+          <h3>Horseback Riding</h3>
+          <p>Guided rides from one hour to full day through stunning mountain terrain. All skill levels welcome.</p>
+          <a href="rides.html">Learn More</a>
+        </div>
+        <div class="feature-card">
+          <img src="images/08227d43_guided-horse-camping-trips-300x199.jpg" alt="Horse Camping">
+          <h3>Horse Camping</h3>
+          <p>Pack into the wilderness with our experienced guides. Drop camps and fully guided expeditions.</p>
+          <a href="camping.html">Learn More</a>
+        </div>
+        <div class="feature-card">
+          <img src="images/01363724_bear-hunt-300x225.jpg" alt="Hunting">
+          <h3>Hunting</h3>
+          <p>Elk, deer, bear, moose, and mountain lion hunts in Colorado's best units. Licensed guides.</p>
+          <a href="hunting.html">Learn More</a>
+        </div>
+        <div class="feature-card">
+          <img src="images/0444b3a4_ABOVE-WEST-TENNESSE-LAKES-IN-EARLY-JULY-1980x1320.jpg" alt="Fishing">
+          <h3>Fishing</h3>
+          <p>Alpine lake fishing and river trips for trout. Remote waters accessed by horseback.</p>
+          <a href="fishing.html">Learn More</a>
+        </div>
+      </div>
+    </section>
 
-<div>
-				<p><span style="color: #ff0000;">If the current weather pattern continues we anticipate a soft opening around May 1. Please call for reservations. Come join us as the snow melts and the mountains take on their green hues. There is no better opportunity to view wildlife like deer, elk and moose.</span></p><p>Halfmoon Packing &amp; Outfitting is Colorado's leading provider of Stagecoach Wagon and Horseback rides along with <a href="https://halfmoonpacking.com/camping/">Camping</a>, Hunting and Fishing trips.  Located outside of Leadville near the resorts of Vail, Beaver Creek, Keystone and Breckenridge we offer the communities of Avon, Frisco, Silverthorne and Dillon the absolute best horseback rides.</p><p>The views are unmatched as all of our rides explore green pastures, aspen groves and pine forests with amazing views of Colorado's highest  peaks, Mount Elbert and Mount Massive. Mount Elbert is the tallest  in Colorado at 14,440 feet and Mt Massive is the largest on the Continent with 5 separate peaks and the most acreage over 14,000 feet on the continent!</p><p>Our hunting and fishing camps are located in both the White River National Forest  and the San Isabel National Forest. The majority of our camps are located in one of three different wilderness areas, Mount Massive Wilderness, Holy Cross Wilderness or Buffalo Peaks Wilderness. In 2022 we packed over 400 mule loads of gear into and out of these areas for our clients ensuring that they all had unique and individually plans excursions.6</p>					</div>
+    <section>
+      <div class="about-preview">
+        <img src="images/0341d4e6_about-1980x1311.jpg" alt="Halfmoon Packing team with horses">
+        <div>
+          <h2>A Legacy in the Rockies</h2>
+          <p>For over 25 years, Halfmoon Packing & Outfitting has led adventurers deep into the Colorado backcountry. Our family-run operation combines old-west hospitality with modern safety and comfort.</p>
+          <p>Whether you are seeking a peaceful hour on the trail or a week-long wilderness expedition, our experienced guides and well-trained horses will make it unforgettable.</p>
+          <a href="about.html" style="display:inline-block;padding:0.9rem 2rem;background:var(--forest);color:var(--cream);border-radius:50px;text-decoration:none;font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:0.85rem;transition:var(--transition)">Meet Our Team</a>
+        </div>
+      </div>
+    </section>
 
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2019/12/StagecoachImg.png" alt="The stagecoach" />														</div>
-
-<h3>STAGE COACH</h3>
-
-<div>
-				<p class="min-height-md">After 100 years, Stagecoach service has returned to the town of Leadville!</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/stagecoach/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Riding.png" alt="Scouting for elk unit 45" />														</div>
-
-<h3>RIDING</h3>
-
-<div>
-				<p class="min-height-md">Depending on the time of year and your desires we offer several lengths of rides from one hour to several days. 95% of our rides are private rides.</p><p class="min-height-md">We may join 2 couples or a combine a single with a group of 3 or 4.</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/rides/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Camping.png" alt="A summer camp nestled in trees, Holy Cross Wilderness" />														</div>
-
-<h3>CAMPING</h3>
-
-<div>
-				<p class="min-height-md">We offer Overnight pack trips in the Holy Cross Wilderness as well as longer trips both in the Holy Cross Wilderness and Buffalo Peaks Wilderness areas.</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/camping/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Hunting.png" alt="Unit 48 elk" />														</div>
-
-<h3>HUNTING</h3>
-
-<div>
-				<p class="min-height-md">The USFS Permits we have allow us to offer Big Game hunts in three separate Colorado Game Management Units, Units 45, 48 and 49.</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/hunting/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Fishing.png" alt="Fly fishing alpine lakes Holy Cross Wilderness" />														</div>
-
-<h3>FISHING</h3>
-
-<div>
-				<p class="min-height-md">Come fish for Brook and Brown Trout in one of the high mountain lakes in either the Mount Massive or Holy Cross Wilderness areas.</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/training-center/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-												<img src="https://halfmoonpacking.com/wp-content/uploads/2020/01/trainingcenter-1024x999.png" alt="training center" />														</div>
-
-<h3>TRAINING CENTER</h3>
-
-<div>
-				<p class="min-height-md">Join our experienced packers, guides and cooks every May and June when they share their knowledge.</p>					</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/training-center/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>More Info</span>
-		</span>
-					</a>
-		</div>
-
-<div dir="ltr">
-			<div aria-live="off">
-								<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2019/12/img_0038-e1577190715664.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2019/12/img_0038-e1577190715664.jpg" alt="Fall colors 2.5v hour horseback ride" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2019/12/Kerry-201-1024x683-1.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Kerry-201-1024x683-1.jpg" alt="almost back on one hour horseback ride" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2019/12/Kerry-304-1024x683-1.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Kerry-304-1024x683-1.jpg" alt="All day horseback ride on Colorado Trail" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2020/02/DSC_0647-scaled-e1581964643535.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2020/02/DSC_0647-scaled-e1581964643535.jpg" alt="Fishing in Alpine lakes near Breckenridge" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2020/01/stage-coach.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2020/01/stage-coach.jpg" alt="Stage coach ride" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2020/01/fly-fishing-alpine-lake.png"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2020/01/fly-fishing-alpine-lake.png" alt="Fishing at alpine lakes" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="7 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2020/01/guided-hunts-colorado.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2020/01/guided-hunts-colorado.jpg" alt="Summer camping" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="8 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2020/01/hunting-services-scaled.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2020/01/hunting-services-scaled.jpg" alt="Yet another pack train" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="9 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2019/12/Hunting.png"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2019/12/Hunting.png" alt="Unit 48 elk" /></figure></a></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="10 of 10"><a href="https://halfmoonpacking.com/wp-content/uploads/2019/12/IMG_1630-1-e1577190672301.jpg"><figure class="swiper-slide-inner"><img class="swiper-slide-image" src="https://halfmoonpacking.com/wp-content/uploads/2019/12/IMG_1630-1-e1577190672301.jpg" alt="Nearing top of 2.5 hour horseback ride" /></figure></a></div>			</div>
-												<div role="button" tabindex="0">
-						<i aria-hidden="true" class="eicon-chevron-left"></i>					</div>
-					<div role="button" tabindex="0">
-						<i aria-hidden="true" class="eicon-chevron-right"></i>					</div>
-									<div class="swiper-pagination"></div>
-									</div>
-
-<h3>Visit us on your next vacation!</h3>
-
-<div>
-			<a href="https://halfmoonpacking.com/reservations/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>Reserve A Trip</span>
-		</span>
-					</a>
-		</div>
-
-<div>
-			<a href="https://halfmoonpacking.com/contact/">
-						<span>
-						<span>
-				<i aria-hidden="true" class="fas fa-angle-double-right"></i>			</span>
-						<span>Contact Us</span>
-		</span>
-					</a>
-		</div>
-</section>
-    </div>
+    <section class="cta-section">
+      <h2>Ready for Your Adventure?</h2>
+      <p>Spaces fill quickly, especially during peak season (June through September). Reserve your spot today and let us handle the rest.</p>
+      <a href="book.html" style="display:inline-block;padding:1.2rem 3rem;background:var(--gold);color:var(--forest);border-radius:50px;font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:var(--transition);box-shadow:0 8px 30px rgba(0,0,0,0.3)">Book Now</a>
+    </section>
   </div>
 </main>
 
-<!-- Footer -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
       <img src="images/c301fa09_logo.png" alt="Halfmoon Packing & Outfitting">
       <p>Colorado's premier outfitter for horseback riding, camping, hunting, and fishing adventures in the Rocky Mountains.</p>
-      <div class="footer-social">
-        <a href="https://www.facebook.com/halfmoonpacking" target="_blank" aria-label="Facebook">FB</a>
-        <a href="https://www.instagram.com/halfmoonpacking/" target="_blank" aria-label="Instagram">IG</a>
-      </div>
     </div>
     <div class="footer-col">
       <h4>Adventures</h4>
@@ -273,9 +152,8 @@
       <h4>Company</h4>
       <a href="about.html">About Us</a>
       <a href="gallery.html">Gallery</a>
-      <a href="training-center.html">Training Center</a>
       <a href="contact.html">Contact</a>
-      <a href="reservations.html">Book Now</a>
+      <a href="book.html">Book Now</a>
     </div>
   </div>
   <div class="footer-bottom">
