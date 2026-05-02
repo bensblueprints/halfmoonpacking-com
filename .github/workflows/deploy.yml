@@ -22,8 +22,8 @@ jobs:
             
             if [ -d "/tmp/halfmoonpacking-com/.git" ]; then
               cd /tmp/halfmoonpacking-com
-              git reset --hard HEAD
-              git pull origin master
+              git fetch origin
+              git reset --hard origin/master
             else
               rm -rf /tmp/halfmoonpacking-com
               git clone https://github.com/bensblueprints/halfmoonpacking-com.git /tmp/halfmoonpacking-com
